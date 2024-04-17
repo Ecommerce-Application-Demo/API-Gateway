@@ -15,13 +15,13 @@ public class ApiGatewayApplication {
 		SpringApplication.run(ApiGatewayApplication.class, args);
 	}
 
-	@Value("${render-server}")
-	String baseUri;
-
-	@Scheduled(fixedDelay = 1000*60*5)
-	void renderRunner() {
-		RestTemplate restTemplate= new RestTemplate();
-		restTemplate.getForEntity(baseUri,String.class);
-	}
+//	@Value("${render-server}")
+//	String baseUri;
+//
+//	@Scheduled(fixedDelay = 1000*60*5)
+//	void renderRunner() {
+//		RestTemplate restTemplate= new RestTemplate();
+//		restTemplate.getForEntity(baseUri,String.class);
+//	}
 
 }
