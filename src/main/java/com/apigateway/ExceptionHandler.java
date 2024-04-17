@@ -11,7 +11,7 @@ public class ExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     public ResponseEntity<String> allOtherException(Exception ex) {
-        log.warn(ex.getMessage(),ex);
+        log.error(ex.getMessage(),ex);
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
