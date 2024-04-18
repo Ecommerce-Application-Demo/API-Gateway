@@ -6,14 +6,10 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: '*'
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-              - PATCH
-            allowed-headers: '*,*'
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowed-headers: "*"
+            allow-credentials: true
       routes:
       - id: CustomerService
         uri: ${CUSTOMER-SERVICE}
