@@ -3,6 +3,9 @@ spring:
     name: API-GATEWAY
   cloud:
     gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_UNIQUE
+        - AddResponseHeader=Access-Control-Allow-Origin, *
       globalcors:
         cors-configurations:
           '[/**]':
@@ -10,6 +13,7 @@ spring:
             allowedMethods: "*"
             allowed-headers: "*"
             allow-credentials: true
+        add-to-simple-url-handler-mapping: true
       routes:
       - id: CustomerService
         uri: ${CUSTOMER-SERVICE}
