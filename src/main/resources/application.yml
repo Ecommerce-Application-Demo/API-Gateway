@@ -1,0 +1,71 @@
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: '*'
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+            allowed-headers: '*'
+      routes:
+      - id: CustomerService
+        uri: ${CUSTOMER-SERVICE}
+        predicates:
+        - Path=/user/**
+      - id: ProductService
+        uri: ${PRODUCT-SERVICE}
+        predicates:
+        - Path=/product/**
+      httpclient:
+        ssl:
+          handshake-timeout-millis: 10000
+          close-notify-flush-timeout-millis: 3000
+          close-notify-read-timeout-millis: 0
+
+  jpa:
+    open-in-view: false
+
+
+server:
+  error:
+    include-stacktrace: never
+    whitelabel:
+      enabled: false
+  port: 8590
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,caches,loggers,info
+
+# Circuit Breaker Configuration
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 10
+        minimum-number-of-calls: 5
+        wait-duration-in-open-state:
+          seconds: 5
+        permitted-number-of-calls-in-half-open-state: 3
+        failure-rate-threshold: 50
+
+# Rate Limiter Configuration
+  ratelimiter:
+    configs:
+      default:
+        limitForPeriod: 7
+        limit-refresh-period:
+          seconds: 1
+
+logging:
+  level:
+    root: warn
