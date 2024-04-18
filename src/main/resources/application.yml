@@ -13,7 +13,7 @@ spring:
               - PUT
               - DELETE
               - PATCH
-            allowed-headers: '*'
+            allowed-headers: '*,*'
       routes:
       - id: CustomerService
         uri: ${CUSTOMER-SERVICE}
