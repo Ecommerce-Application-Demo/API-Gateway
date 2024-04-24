@@ -67,4 +67,4 @@ resilience4j:
 
 logging:
   level:
-    root: warn
+    root: error

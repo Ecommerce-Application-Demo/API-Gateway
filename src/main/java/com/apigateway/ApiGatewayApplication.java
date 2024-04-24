@@ -8,9 +8,16 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
+@EnableScheduling
 public class ApiGatewayApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiGatewayApplication.class, args);
+	}
+
+	@Scheduled
+	public void scheduled() {
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.getForEntity("https://ecommerce-backend-dev.onrender.com/actuator/info", String.class);
 	}
 }
